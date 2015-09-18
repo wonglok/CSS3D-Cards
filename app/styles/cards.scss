@@ -81,7 +81,7 @@ $cardHeight:100px;
 }
 
 .card-group{
-	transform: rotateX(45deg) rotateZ(-45deg);
+	transform: translate3d(0,0,0) rotateX(50deg) rotateZ(-60deg);
 	
 	//make child li
 	transform-style: preserve-3d;

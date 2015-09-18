@@ -11,7 +11,6 @@ console.log('\'Allo \'Allo!');
 // });
 
 
-
 // setTimeout(function(){
 // 	$('.card-container').toggleClass('arrived');
 // }, 1000);
