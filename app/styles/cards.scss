@@ -1,0 +1,116 @@
+$cardNumber: 10;
+
+$cardContainerWidth:100vw;
+$cardContainerHeight:100vh;
+
+$cardWidth: 100px;
+$cardHeight:100px;
+
+
+.card-container{
+	background-color: papayawhip;
+
+	width: $cardContainerWidth;
+	height: $cardContainerHeight;
+
+	perspective:3000px;
+
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+
+	overflow: hidden;
+}
+
+.card-group{
+	height: $cardHeight;
+	width:$cardWidth;
+	position: relative;
+
+	
+	li{
+		position: absolute;
+		top:0;
+		left:0;
+		display: block;
+
+		width:$cardWidth;
+		height:$cardHeight;
+		
+		list-style: none;
+	}
+
+	padding: 0px;
+	margin: 0px;
+
+}
+
+@mixin card-animation{
+	$fountain: "fountain";
+
+	@for $i from 1 through $cardNumber {
+		$fx: (($cardNumber/2) * -1 + $i ) ;
+		
+
+		@keyframes #{$fountain}-#{$i} {
+			0% {
+				opacity: 0;
+				transform: scale(0) ;
+			}
+			10% {
+				opacity: 1;
+				transform: scale(1);
+			}
+			90%{
+				opacity: 1;
+			}
+			100%{
+				opacity: 0;
+				transform: scale(1.05) rotateZ($fx * 15deg) translate3d( $fx * 7vw , $fx * 7vh, $cardContainerHeight * 1.3);
+			}
+		}
+		
+		.card-#{$i} {
+			background-image: url('http://lorempixel.com/100/10#{$i}');
+			background-size: cover;
+
+			opacity: 0;
+			animation: #{$fountain}-#{$i} 2.5s ($i * random(100)/100 * 0.25s ) infinite cubic-bezier(.47,.35,.19,.86);
+		}
+	}
+}
+
+.card-group{
+	transform: rotateX(45deg) rotateZ(-45deg);
+	
+	//make child li
+	transform-style: preserve-3d;
+	@include card-animation;
+}
+
+
+.card-group{
+	li{
+		//make child li:before
+		transform-style: preserve-3d;
+	}
+	li:before{
+		position: absolute;
+		content:"";
+
+		width:$cardWidth - 5;
+		height:$cardHeight - 5;
+	
+
+		background: rgba(0, 0, 0, 0.5);
+		box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+		transform: translateZ(-5px);
+
+	}
+}
+
+
+
+
+
+
